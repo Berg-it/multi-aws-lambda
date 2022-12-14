@@ -1,0 +1,41 @@
+{
+    "lambda_function_name": {
+        "function_name": "lambda_function_name",
+        "filename": "zipped-lambda/lambda-1.zip",
+        "handler": "index.handler",
+        "role": "iam_for_lambda",
+        "source_code_hash": "${fct_hash}",
+        "runtime": "nodejs16.x",
+        "memory_size": 250,
+        "set_env": 1,
+        "environment": {
+            "foo": "bar"
+        }
+    },
+    "lambda_function_name2": {
+        "function_name": "lambda_function_name2",
+        "filename": "zipped-lambda/lambda-2.zip",
+        "handler": "index.handler",
+        "role": "iam_for_lambda2",
+        "source_code_hash": "${fct_hash}",
+        "runtime": "nodejs16.x",
+        "memory_size": 250,
+        "set_env": 1,
+        "environment": {
+            "test": "Test"
+        }
+    },
+    "lambda_function_name3": {
+        "function_name": "lambda_function_name2",
+        "filename": "zipped-lambda/lambda-2.zip",
+        "handler": "index.handler",
+        "role": "iam_for_lambda2",
+        "source_code_hash": "${fct_hash}",
+        "runtime": "nodejs16.x",
+        "memory_size": 250,
+        "set_env": 1,
+        "environment": {
+            "test": "Test"
+        }
+    }
+}
