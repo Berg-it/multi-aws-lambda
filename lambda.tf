@@ -44,3 +44,18 @@ resource "aws_lambda_permission" "allow_bucket" {
   source_arn    = replace("arn:aws:s3:::bucket_name", "bucket_name", each.value.trigger_source.partial_source_arn) #TO Update
 }
 
+
+resource "aws_s3_bucket_notification" "bucket_notification" {
+
+  for_each = {
+    for key, value in local.lambda_config : key => value
+    if value.trigger_source.trigger == true
+  }
+
+  bucket = each.value.trigger_source.partial_source_arn
+
+  lambda_function {
+    lambda_function_arn = replace(replace(replace("arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME", "ACCOUNT_ID", data.aws_caller_identity.current.account_id), "REGION", data.aws_region.current.name), "FUNCTION_NAME", each.key)
+    events              = each.value.trigger_source.events
+  }
+}

@@ -7,7 +7,7 @@
         "source_code_hash": "${fct_hash}",
         "runtime": "nodejs16.x",
         "memory_size": 250,
-        "set_env": 1,
+        "set_env": 0,
         "environment": {
         },
         "trigger_source":{"trigger":false}
@@ -42,7 +42,8 @@
         "trigger_source":{
             "trigger":true,
             "principal":"s3.amazonaws.com",
-            "partial_source_arn":"MY_bucket_name"    
+            "partial_source_arn":"bergi-it-multi-lambda" ,
+            "events":["s3:ObjectCreated:*"]   
         }
     }
 }
