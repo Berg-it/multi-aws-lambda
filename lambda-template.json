@@ -9,8 +9,8 @@
         "memory_size": 250,
         "set_env": 1,
         "environment": {
-            "foo": "bar"
-        }
+        },
+        "trigger_source":{"trigger":false}
     },
     "lambda_function_name2": {
         "function_name": "lambda_function_name2",
@@ -23,10 +23,12 @@
         "set_env": 1,
         "environment": {
             "test": "Test"
-        }
+        },
+        
+        "trigger_source":{"trigger":false}
     },
     "lambda_function_name3": {
-        "function_name": "lambda_function_name2",
+        "function_name": "lambda_function_name3",
         "filename": "zipped-lambda/lambda-2.zip",
         "handler": "index.handler",
         "role": "iam_for_lambda2",
@@ -36,6 +38,11 @@
         "set_env": 1,
         "environment": {
             "test": "Test"
+        },
+        "trigger_source":{
+            "trigger":true,
+            "principal":"s3.amazonaws.com",
+            "partial_source_arn":"MY_bucket_name"    
         }
     }
 }

@@ -25,4 +25,22 @@ resource "aws_lambda_function" "test_lambda" {
       variables = each.value.environment
     }
   }
+  tags = {
+    Name = index(keys(local.lambda_config), each.key)
+  }
 }
+
+
+##Gives an external source (like an EventBridge Rule, SNS, or S3) permission to access the Lambda function.
+resource "aws_lambda_permission" "allow_bucket" {
+
+  for_each = {
+    for key, value in local.lambda_config : key => value
+    if value.trigger_source.trigger == true
+  }
+  action        = "lambda:InvokeFunction"
+  function_name = each.value.function_name
+  principal     = each.value.trigger_source.principal
+  source_arn    = replace("arn:aws:s3:::bucket_name", "bucket_name", each.value.trigger_source.partial_source_arn) #TO Update
+}
+
